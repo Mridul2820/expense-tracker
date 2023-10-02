@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "appwrite": "^13.0.0",
+    "dayjs": "^1.11.10",
     "next": "latest",
     "next-cookie": "^2.8.0",
     "react": "latest",
     "react-dom": "latest",
-    "react-hot-toast": "^2.4.1"
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^4.11.0"
   },
   "devDependencies": {
     "autoprefixer": "latest",
