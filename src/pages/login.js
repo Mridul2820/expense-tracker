@@ -17,7 +17,9 @@ const Login = (props) => {
     try {
       await account.createEmailSession(email, password);
       const jwt = await account.createJWT();
-      cookie.set("user", jwt.jwt);
+      const user = await account.get();
+      cookie.set("jwt", jwt.jwt);
+      cookie.set("userid", user.$id);
       toast.success("Logged in successfully");
       router.push("/");
     } catch (error) {

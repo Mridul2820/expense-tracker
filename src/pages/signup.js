@@ -19,7 +19,9 @@ const SignUp = (props) => {
       await account.create("unique()", email, password, name);
       await account.createEmailSession(email, password);
       const jwt = await account.createJWT();
-      cookie.set("user", jwt.jwt);
+      const user = await account.get();
+      cookie.set("jwt", jwt.jwt);
+      cookie.set("userid", user.$id);
       toast.success("Signed up successfully");
       router.push("/");
     } catch (error) {
