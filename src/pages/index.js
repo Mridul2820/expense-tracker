@@ -12,30 +12,33 @@ import toast from "react-hot-toast";
 import DeleteExpensePopup from "@/components/DeleteExpensePopup";
 import ExpenseFormPopup from "@/components/ExpenseFormPopup";
 import Navbar from "@/components/Navbar";
+import { useRouter } from "next/router";
 
 const Home = (props) => {
   const [expenses, setExpenses] = useState();
   const [popup, setPopup] = useState(null);
   const cookie = useCookie(props.cookie);
+  const router = useRouter();
   const jwt = cookie.get("jwt");
   const userId = cookie.get("userid");
 
   const getExpenses = async () => {
-    const { items } = await fetch("/api/expense/list", {
+    const response = await fetch("/api/expense/list", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         jwt,
       },
       body: JSON.stringify({ userId }),
-    }).then((res) => res.json());
+    });
 
-    setExpenses(items);
+    const data = await response.json();
+    setExpenses(data.items);
   };
 
   useEffect(() => {
     getExpenses();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, []);
 
   const createExpense = async (title, amount, type) => {

@@ -1,6 +1,6 @@
+import React from "react";
 import { useCookie } from "next-cookie";
 import { useRouter } from "next/router";
-import React from "react";
 import { AiOutlineLogin } from "react-icons/ai";
 
 const Navbar = (props) => {
