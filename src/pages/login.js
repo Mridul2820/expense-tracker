@@ -32,7 +32,7 @@ const Login = (props) => {
       <div className="flex-grow flex flex-col max-w-xl justify-center p-6">
         <h1 className="text-6xl font-bold">Login</h1>
         <p className="mt-6">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link href="/signup" className="cursor-pointer underline">
             Sign Up
           </Link>
