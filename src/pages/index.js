@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 
 import DeleteExpensePopup from "@/components/DeleteExpensePopup";
 import ExpenseFormPopup from "@/components/ExpenseFormPopup";
+import Navbar from "@/components/Navbar";
 
 const Home = (props) => {
   const [expenses, setExpenses] = useState();
@@ -126,6 +127,7 @@ const Home = (props) => {
           deleteExpense={deleteExpense}
         />
       )}
+      <Navbar />
       <div className="container mx-auto p-4 max-w-5xl">
         <h1 className="text-2xl text-center font-bold">Your expenses</h1>
         <button
