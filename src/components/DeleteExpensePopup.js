@@ -1,9 +1,6 @@
 import React from "react";
-import toast from "react-hot-toast";
 
 const DeleteExpensePopup = ({ popup, setPopup, deleteExpense }) => {
-  console.log(popup);
-
   return (
     <div className="fixed inset-0 w-full h-full bg-black bg-opacity-25 flex items-center justify-center">
       <div className="bg-white p-5 relative w-11/12 max-w-xl rounded-md">

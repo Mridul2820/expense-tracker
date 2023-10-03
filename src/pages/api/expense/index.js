@@ -33,8 +33,9 @@ export default async (req, res) => {
       );
       return res.status(200).json({ message: "Saved successfully" });
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({ message: "Internal server error" });
+      return res
+        .status(500)
+        .json({ message: "Internal server error", error: error.message });
     }
   } else if (method === "PUT") {
     const { title, amount, type, docId } = req.body;
@@ -54,8 +55,9 @@ export default async (req, res) => {
       );
       return res.status(200).json({ message: "Updated successfully" });
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({ message: "Internal server error" });
+      return res
+        .status(500)
+        .json({ message: "Internal server error", error: error.message });
     }
   } else if (method === "DELETE") {
     const { docId } = req.body;
@@ -67,8 +69,9 @@ export default async (req, res) => {
       );
       return res.status(200).json({ message: "Deleted successfully" });
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({ message: "Internal server error" });
+      return res
+        .status(500)
+        .json({ message: "Internal server error", error: error.message });
     }
   } else {
     return res.status(405).json({ message: "Method Not Allowed" });

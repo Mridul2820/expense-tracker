@@ -8,7 +8,7 @@ const Navbar = (props) => {
   const router = useRouter();
 
   return (
-    <div className="flex justify-between items-center py-2 px-5 border-b">
+    <div className="flex justify-between items-center py-5 px-8 border-b">
       <div className="w-6" />
       <div className="">
         <h1 className="text-xl font-bold">Expense Tracker</h1>

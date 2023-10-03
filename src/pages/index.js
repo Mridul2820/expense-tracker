@@ -15,7 +15,7 @@ const Home = (props) => {
   const [popup, setPopup] = useState(null);
   const [start, setStart] = useState(0);
   const [total, setTotal] = useState(0);
-  const limit = 2;
+  const limit = 4;
   const cookie = useCookie(props.cookie);
   const router = useRouter();
   const jwt = cookie.get("jwt");
@@ -115,8 +115,6 @@ const Home = (props) => {
 
   const pages = Math.ceil(total / limit);
 
-  console.log(start);
-
   return (
     <>
       {popup?.type === "new" && (
@@ -152,20 +150,21 @@ const Home = (props) => {
         </button>
         <ExpenseList setPopup={setPopup} expenses={expenses} />
         <div className="flex justify-center gap-3">
-          {[...Array(pages)].map((_, i) => (
-            <button
-              key={i}
-              className={`border border-green-700 rounded-full px-3 py-1 mt-5 ${
-                i * limit === start
-                  ? "bg-green-700 text-white"
-                  : "bg-white text-green-700"
-              }
+          {expenses?.length > 0 &&
+            [...Array(pages)].map((_, i) => (
+              <button
+                key={i}
+                className={`border border-green-700 rounded-full px-3 py-1 mt-5 ${
+                  i * limit === start
+                    ? "bg-green-700 text-white"
+                    : "bg-white text-green-700"
+                }
               `}
-              onClick={() => setStart(i * limit)}
-            >
-              {i + 1}
-            </button>
-          ))}
+                onClick={() => setStart(i * limit)}
+              >
+                {i + 1}
+              </button>
+            ))}
         </div>
       </div>
     </>
