@@ -3,6 +3,7 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { useCookie } from "next-cookie";
+import { ID } from "appwrite";
 
 import { account } from "@/config/appwrite";
 
@@ -16,7 +17,7 @@ const SignUp = (props) => {
   const signup = async (e) => {
     e.preventDefault();
     try {
-      await account.create("unique()", email, password, name);
+      await account.create(ID.unique(), email, password, name);
       await account.createEmailSession(email, password);
       const jwt = await account.createJWT();
       const user = await account.get();
