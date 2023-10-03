@@ -8,7 +8,8 @@ const ExpenseFormPopup = ({
   type,
   docId,
   setPopup,
-  action,
+  createExpense,
+  editExpense,
   form,
 }) => {
   const [item, setItem] = useState({
@@ -30,7 +31,13 @@ const ExpenseFormPopup = ({
       return toast.error("Type is required");
     }
 
-    await action(docId, item.title, item.amount, item.type);
+    if (form === "Create") {
+      await createExpense(item.title, item.amount, item.type);
+    }
+
+    if (form === "Update") {
+      await editExpense(docId, item.title, item.amount, item.type);
+    }
   };
 
   return (

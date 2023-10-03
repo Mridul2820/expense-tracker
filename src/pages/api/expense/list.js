@@ -10,7 +10,7 @@ export default async (req, res) => {
   const method = req.method;
 
   if (method === "POST") {
-    const { userId } = req.body;
+    const { userId, limit, start } = req.body;
     const { jwt } = req.headers;
 
     if (!userId || !jwt) {
@@ -22,10 +22,16 @@ export default async (req, res) => {
       const items = await database.listDocuments(
         EXPENSE_DATABASE_ID,
         EXPENSE_COLLECTION_ID,
-        [Query.equal("userId", [userId]), Query.orderDesc("$createdAt")]
+        [
+          Query.equal("userId", [userId]),
+          Query.orderDesc("$createdAt"),
+          Query.limit(limit),
+          Query.offset(parseInt(start)),
+        ]
       );
-
-      return res.status(200).json({ items: items.documents });
+      return res
+        .status(200)
+        .json({ items: items.documents, total: items.total });
     } catch (error) {
       return res
         .status(500)

@@ -12,6 +12,9 @@ import ExpenseList from "@/components/ExpenseList";
 const Home = (props) => {
   const [expenses, setExpenses] = useState();
   const [popup, setPopup] = useState(null);
+  const [start, setStart] = useState(0);
+  const [total, setTotal] = useState(0);
+  const limit = 2;
   const cookie = useCookie(props.cookie);
   const router = useRouter();
   const jwt = cookie.get("jwt");
@@ -24,7 +27,11 @@ const Home = (props) => {
         "Content-Type": "application/json",
         jwt,
       },
-      body: JSON.stringify({ userId }),
+      body: JSON.stringify({
+        userId: userId,
+        start: start,
+        limit: limit,
+      }),
     });
     const data = await response.json();
     if (data.error === "Failed to verify JWT. Invalid token: Expired") {
@@ -34,13 +41,14 @@ const Home = (props) => {
       router.push("/login");
     } else {
       setExpenses(data.items);
+      setTotal(data.total);
     }
   };
 
   useEffect(() => {
     getExpenses();
     // eslint-disable-next-line
-  }, []);
+  }, [start]);
 
   const createExpense = async (title, amount, type) => {
     const response = await fetch("/api/expense", {
@@ -100,15 +108,20 @@ const Home = (props) => {
       toast.success("Deleted successfully");
       setPopup(null);
       getExpenses();
+      setStart(0);
     }
   };
+
+  const pages = Math.ceil(total / limit);
+
+  console.log(start);
 
   return (
     <>
       {popup?.type === "new" && (
         <ExpenseFormPopup
           setPopup={setPopup}
-          action={createExpense}
+          createExpense={createExpense}
           form="Create"
         />
       )}
@@ -121,7 +134,7 @@ const Home = (props) => {
           type={popup?.data?.type}
           popup={popup}
           setPopup={setPopup}
-          action={editExpense}
+          editExpense={editExpense}
         />
       )}
       {popup?.type === "delete" && (
@@ -142,6 +155,22 @@ const Home = (props) => {
           New Expense
         </button>
         <ExpenseList setPopup={setPopup} expenses={expenses} />
+        <div className="flex justify-center gap-3">
+          {[...Array(pages)].map((_, i) => (
+            <button
+              key={i}
+              className={`border border-green-700 rounded-full px-3 py-1 mt-5 ${
+                i * limit === start
+                  ? "bg-green-700 text-white"
+                  : "bg-white text-green-700"
+              }
+              `}
+              onClick={() => setStart(i * limit)}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
       </div>
     </>
   );
