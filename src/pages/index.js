@@ -31,9 +31,15 @@ const Home = (props) => {
       },
       body: JSON.stringify({ userId }),
     });
-
     const data = await response.json();
-    setExpenses(data.items);
+    if (data.error === "Failed to verify JWT. Invalid token: Expired") {
+      cookie.remove("jwt");
+      cookie.remove("userid");
+      toast.error("Session expired, please login again");
+      router.push("/login");
+    } else {
+      setExpenses(data.items);
+    }
   };
 
   useEffect(() => {
