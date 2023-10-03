@@ -27,8 +27,9 @@ export default async (req, res) => {
 
       return res.status(200).json({ items: items.documents });
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({ message: "Internal server error" });
+      return res
+        .status(500)
+        .json({ message: "Internal server error", error: error.message });
     }
   } else {
     return res.status(405).json({ message: "Method Not Allowed" });
