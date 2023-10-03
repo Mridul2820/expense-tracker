@@ -8,11 +8,11 @@ import {
   AiOutlinePlusCircle,
 } from "react-icons/ai";
 import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 import DeleteExpensePopup from "@/components/DeleteExpensePopup";
 import ExpenseFormPopup from "@/components/ExpenseFormPopup";
 import Navbar from "@/components/Navbar";
-import { useRouter } from "next/router";
 
 const Home = (props) => {
   const [expenses, setExpenses] = useState();
