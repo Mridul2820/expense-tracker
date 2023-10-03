@@ -5,9 +5,10 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 
 import DeleteExpensePopup from "@/components/DeleteExpensePopup";
-import ExpenseFormPopup from "@/components/ExpenseFormPopup";
+import CreateExpensePopup from "@/components/CreateExpensePopup";
 import Navbar from "@/components/Navbar";
 import ExpenseList from "@/components/ExpenseList";
+import EditExpensePopup from "@/components/EditExpensePopup";
 
 const Home = (props) => {
   const [expenses, setExpenses] = useState();
@@ -119,15 +120,10 @@ const Home = (props) => {
   return (
     <>
       {popup?.type === "new" && (
-        <ExpenseFormPopup
-          setPopup={setPopup}
-          createExpense={createExpense}
-          form="Create"
-        />
+        <CreateExpensePopup setPopup={setPopup} createExpense={createExpense} />
       )}
       {popup?.type === "edit" && (
-        <ExpenseFormPopup
-          form="Update"
+        <EditExpensePopup
           docId={popup?.data?.$id}
           title={popup?.data?.title}
           amount={popup?.data?.amount}

@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
-const ExpenseFormPopup = ({
+const EditExpensePopup = ({
   title,
   amount,
   type,
   docId,
   setPopup,
-  createExpense,
   editExpense,
-  form,
 }) => {
   const [item, setItem] = useState({
     title: title || "",
@@ -31,13 +29,7 @@ const ExpenseFormPopup = ({
       return toast.error("Type is required");
     }
 
-    if (form === "Create") {
-      await createExpense(item.title, item.amount, item.type);
-    }
-
-    if (form === "Update") {
-      await editExpense(docId, item.title, item.amount, item.type);
-    }
+    await editExpense(docId, item.title, item.amount, item.type);
   };
 
   return (
@@ -49,7 +41,7 @@ const ExpenseFormPopup = ({
         >
           <AiOutlineCloseCircle className="text-2xl" />
         </button>
-        <p className="text-xl font-bold">{form} Expense</p>
+        <p className="text-xl font-bold">Update Expense</p>
         <form className="grid grid-cols-2 gap-3 mt-2" onSubmit={handleSubmit}>
           <div className="col-span-2">
             <label htmlFor="title">Title</label>
@@ -91,7 +83,7 @@ const ExpenseFormPopup = ({
               type="submit"
               className="border rounded-md p-2 bg-green-700 text-white w-40"
             >
-              {form}
+              Update
             </button>
           </div>
         </form>
@@ -100,4 +92,4 @@ const ExpenseFormPopup = ({
   );
 };
 
-export default ExpenseFormPopup;
+export default EditExpensePopup;
