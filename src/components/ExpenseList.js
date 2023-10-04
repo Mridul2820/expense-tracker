@@ -1,52 +1,47 @@
-import dayjs from "dayjs";
 import React from "react";
-import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import dayjs from "dayjs";
 
 const ExpenseList = ({ expenses, setPopup }) => {
   return (
-    <div className="pt-3">
+    <div className="u-padding-block-8">
       {expenses?.length > 0 &&
         expenses?.map((expense) => (
           <div
-            className={`border rounded-md p-4 my-4 ${
-              expense.type === "Paid" ? "border-red-800" : "border-green-800"
-            }`}
+            className="card u-padding-block-16 u-margin-32"
             key={expense.$id}
           >
-            <div className="flex justify-between">
-              <p className="text-xl font-bold">{expense.title}</p>
-              <div className="flex gap-3">
-                <p className="text-xl font-bold">
+            <div className="u-flex u-main-space-between">
+              <p className="heading-level-4 u-bold">{expense.title}</p>
+              <div className="u-flex u-gap-8">
+                <p className="heading-level-5 u-bold">
                   {expense.type === "Paid" && "-"}
                   {expense.type === "Received" && "+"}${expense.amount}
                 </p>
                 <span
-                  className={`border px-2 font-semibold rounded-sm ${
-                    expense.type === "Paid"
-                      ? "border-red-800 bg-red-50"
-                      : "border-green-800 bg-gray-50"
-                  }`}
+                  className={
+                    expense.type === "Paid" ? "tag is-success" : "tag is-danger"
+                  }
                 >
                   {expense.type}
                 </span>
               </div>
             </div>
-            <div className="flex justify-between items-center mt-3">
-              <p className="text-gray-500">
+            <div className="u-flex u-main-space-between">
+              <p className="body-text-1">
                 {dayjs(expense.$createdAt).format("DD MMM YYYY hh:mm A")}
               </p>
-              <div className="flex gap-2 text-2xl">
+              <div className="u-flex u-gap-8">
                 <button
                   className="cursor-pointer"
                   onClick={() => setPopup({ type: "edit", data: expense })}
                 >
-                  <AiOutlineEdit className="text-blue-800" />
+                  <div className="icon-pencil-alt" />
                 </button>
                 <button
                   className="cursor-pointer"
                   onClick={() => setPopup({ type: "delete", data: expense })}
                 >
-                  <AiOutlineDelete className="text-red-800" />
+                  <div className="icon-trash" />
                 </button>
               </div>
             </div>
