@@ -1,5 +1,5 @@
 import { Toaster } from "react-hot-toast";
-import "@/styles/globals.css";
+import "@appwrite.io/pink";
 
 export default function App({ Component, pageProps }) {
   return (
