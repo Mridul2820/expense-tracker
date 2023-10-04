@@ -2,18 +2,20 @@ import React from "react";
 
 const DeleteExpensePopup = ({ popup, setPopup, deleteExpense }) => {
   return (
-    <div className="fixed inset-0 w-full h-full bg-black bg-opacity-25 flex items-center justify-center">
-      <div className="bg-white p-5 relative w-11/12 max-w-xl rounded-md">
-        <p className="text-xl font-bold text-center">Delete Expense Expense</p>
-        <div className="flex justify-center gap-2 mt-5">
+    <div className="u-position-fixed u-inset-0 u-width-full-line u-full-screen-height u-flex u-cross-center u-main-center u-z-index-10 lite-bg">
+      <div className="card u-max-width-600 u-width-full-line">
+        <p className="heading-level-3 font-bold u-text-center">
+          Delete Expense
+        </p>
+        <div className="u-flex u-main-center u-margin-block-start-12 u-gap-12">
           <button
-            className="border rounded-md p-2 bg-red-700 text-white w-40"
+            className="button is-secondary"
             onClick={() => setPopup(null)}
           >
             Cancel
           </button>
           <button
-            className="border rounded-md p-2 bg-green-700 text-white w-40 ml-2"
+            className="button"
             onClick={() => deleteExpense(popup.data.$id)}
           >
             Delete
