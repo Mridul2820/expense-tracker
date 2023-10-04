@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useCookie } from "next-cookie";
-import { AiOutlinePlusCircle } from "react-icons/ai";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 
 import DeleteExpensePopup from "@/components/DeleteExpensePopup";
 import CreateExpensePopup from "@/components/CreateExpensePopup";
-import Navbar from "@/components/Navbar";
 import ExpenseList from "@/components/ExpenseList";
 import EditExpensePopup from "@/components/EditExpensePopup";
 
@@ -138,28 +136,22 @@ const Home = (props) => {
           deleteExpense={deleteExpense}
         />
       )}
-      <Navbar />
-      <div className="container mx-auto p-4 max-w-5xl">
-        <h1 className="text-2xl text-center font-bold">Your expenses</h1>
+      <div className="container u-flex-vertical	u-gap-12 u-cross-center">
+        <h1 className="heading-level-1 font-bold">Your expenses</h1>
         <button
-          className="flex justify-center gap-2 border border-green-700 rounded-md px-3 py-1 mx-auto mt-5"
+          className="button"
           onClick={() => setPopup({ type: "new", data: null })}
         >
-          <AiOutlinePlusCircle className="text-2xl" />
-          New Expense
+          <span class="icon-plus" aria-hidden="true"></span>
+          <span class="text"> New Expense</span>
         </button>
         <ExpenseList setPopup={setPopup} expenses={expenses} />
-        <div className="flex justify-center gap-3">
+        <div className="u-flex u-main-center u-gap-12">
           {expenses?.length > 0 &&
             [...Array(pages)].map((_, i) => (
               <button
                 key={i}
-                className={`border border-green-700 rounded-full px-3 py-1 mt-5 ${
-                  i * limit === start
-                    ? "bg-green-700 text-white"
-                    : "bg-white text-green-700"
-                }
-              `}
+                className="button is-only-icon"
                 onClick={() => setStart(i * limit)}
               >
                 {i + 1}

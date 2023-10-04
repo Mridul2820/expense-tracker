@@ -3,11 +3,11 @@ import dayjs from "dayjs";
 
 const ExpenseList = ({ expenses, setPopup }) => {
   return (
-    <div className="u-padding-block-8">
+    <div className="u-padding-block-8 u-width-full-line">
       {expenses?.length > 0 &&
         expenses?.map((expense) => (
           <div
-            className="card u-padding-block-16 u-margin-32"
+            className="card u-padding-block-16 u-margin-block-start-12"
             key={expense.$id}
           >
             <div className="u-flex u-main-space-between">
@@ -19,7 +19,7 @@ const ExpenseList = ({ expenses, setPopup }) => {
                 </p>
                 <span
                   className={
-                    expense.type === "Paid" ? "tag is-success" : "tag is-danger"
+                    expense.type === "Paid" ? "tag is-danger" : "tag is-success"
                   }
                 >
                   {expense.type}
