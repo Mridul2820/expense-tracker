@@ -1,6 +1,7 @@
 import { Toaster } from "react-hot-toast";
 import "@appwrite.io/pink";
 import "@appwrite.io/pink-icons";
+import "../styles/globals.css";
 
 export default function App({ Component, pageProps }) {
   return (

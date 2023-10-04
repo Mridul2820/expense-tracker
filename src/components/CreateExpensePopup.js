@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const CreateExpensePopup = ({ setPopup, createExpense }) => {
   const [item, setItem] = useState({
@@ -26,56 +25,64 @@ const CreateExpensePopup = ({ setPopup, createExpense }) => {
   };
 
   return (
-    <div className="fixed inset-0 w-full h-full bg-black bg-opacity-25 flex items-center justify-center">
-      <div className="bg-white p-5 relative w-11/12 max-w-xl rounded-md">
+    <div className="u-position-fixed u-inset-0 u-width-full-line u-full-screen-height u-flex u-cross-center u-main-center u-z-index-10 lite-bg">
+      <div className="card u-max-width-600 u-width-full-line">
         <button
           onClick={() => setPopup(null)}
-          className="absolute top-2 right-2 p-2"
+          className="u-position-absolute u-inset-inline-end-16 u-inset-block-start-16"
         >
-          <AiOutlineCloseCircle className="text-2xl" />
+          <span className="icon-x-circle" />
         </button>
-        <p className="text-xl font-bold">Create Expense</p>
-        <form className="grid grid-cols-2 gap-3 mt-2" onSubmit={handleSubmit}>
-          <div className="col-span-2">
-            <label htmlFor="title">Title</label>
-            <input
-              type="text"
-              id="title"
-              className="border rounded-md p-2 w-full"
-              value={item.title}
-              onChange={(e) => setItem({ ...item, title: e.target.value })}
-            />
-          </div>
+        <p className="heading-level-3 font-bold u-text-center">
+          Create Expense
+        </p>
+        <form className="u-margin-block-start-12" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="amount">Amount($)</label>
-            <input
-              type="number"
-              id="amount"
-              min="0"
-              className="border rounded-md p-2 w-full"
-              value={item.amount}
-              onChange={(e) => setItem({ ...item, amount: e.target.value })}
-            />
+            <label class="label">Title</label>
+            <div class="input-text-wrapper">
+              <input
+                class="input-text"
+                placeholder="Title"
+                id="title"
+                type="text"
+                required={true}
+                value={item.title}
+                onChange={(e) => setItem({ ...item, title: e.target.value })}
+              />
+            </div>
           </div>
-          <div>
-            <label htmlFor="type">Type</label>
-            <select
-              id="type"
-              className="border rounded-md p-2 w-full"
-              value={item.type}
-              onChange={(e) => setItem({ ...item, type: e.target.value })}
-            >
-              <option value="">Select</option>
-              <option value="Paid">Paid</option>
-              <option value="Received">Received</option>
-            </select>
+          <div className="u-margin-block-start-12">
+            <label class="label">Amount($)</label>
+            <div class="input-text-wrapper">
+              <input
+                class="input-text"
+                placeholder="Title"
+                id="amount"
+                type="number"
+                required={true}
+                min="0"
+                value={item.amount}
+                onChange={(e) => setItem({ ...item, amount: e.target.value })}
+              />
+            </div>
           </div>
-
-          <div className="col-span-2 flex justify-center">
-            <button
-              type="submit"
-              className="border rounded-md p-2 bg-green-700 text-white w-40"
-            >
+          <div className="u-margin-block-start-12">
+            <label class="label">Type</label>
+            <div class="input-text-wrapper">
+              <select
+                id="type"
+                className="input-text"
+                value={item.type}
+                onChange={(e) => setItem({ ...item, type: e.target.value })}
+              >
+                <option value="">Select</option>
+                <option value="Paid">Paid</option>
+                <option value="Received">Received</option>
+              </select>
+            </div>
+          </div>
+          <div className="u-margin-block-start-12">
+            <button type="submit" className="button">
               Create
             </button>
           </div>
