@@ -1,5 +1,4 @@
 import React from "react";
-import dayjs from "dayjs";
 
 const ExpenseList = ({ expenses, setPopup }) => {
   return (
@@ -28,7 +27,13 @@ const ExpenseList = ({ expenses, setPopup }) => {
             </div>
             <div className="u-flex u-main-space-between">
               <p className="body-text-1">
-                {dayjs(expense.$createdAt).format("DD MMM YYYY hh:mm A")}
+                {new Date(expense.$createdAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
               </p>
               <div className="u-flex u-gap-8">
                 <button
