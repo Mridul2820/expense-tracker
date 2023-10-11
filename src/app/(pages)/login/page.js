@@ -1,8 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/router";
-import { useCookie } from "next-cookie";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { useCookie } from "next-cookie";
 
 import { account } from "@/config/appwrite";
 

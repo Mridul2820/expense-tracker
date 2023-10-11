@@ -1,7 +1,9 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
-import { useCookie } from "next-cookie";
 import toast from "react-hot-toast";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+import { useCookie } from "next-cookie";
 
 import DeleteExpensePopup from "@/components/DeleteExpensePopup";
 import CreateExpensePopup from "@/components/CreateExpensePopup";
@@ -13,9 +15,9 @@ const Home = (props) => {
   const [popup, setPopup] = useState(null);
   const [start, setStart] = useState(0);
   const [total, setTotal] = useState(0);
-  const limit = 5;
-  const cookie = useCookie(props.cookie);
+  const limit = 4;
   const router = useRouter();
+  const cookie = useCookie(props.cookie);
   const jwt = cookie.get("jwt");
   const userId = cookie.get("userid");
 
@@ -136,7 +138,7 @@ const Home = (props) => {
           deleteExpense={deleteExpense}
         />
       )}
-      <div className="container u-flex-vertical	u-gap-12 u-cross-center u-main-center">
+      <div className="container u-flex-vertical	u-gap-12 u-cross-center">
         <h1 className="heading-level-1 font-bold">Your expenses</h1>
         <button
           className="button"

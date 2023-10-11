@@ -1,9 +1,11 @@
+"use client";
+
 import { useState } from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import { useRouter } from "next/router";
-import { useCookie } from "next-cookie";
+import { useRouter } from "next/navigation";
 import { ID } from "appwrite";
+import { useCookie } from "next-cookie";
 
 import { account } from "@/config/appwrite";
 
@@ -50,7 +52,7 @@ const SignUp = (props) => {
                 id="name"
                 type="text"
                 required={true}
-                onChange={(e) => sette(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
           </div>
