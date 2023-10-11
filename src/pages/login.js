@@ -39,10 +39,10 @@ const Login = (props) => {
         </p>
         <form onSubmit={loginUser}>
           <div>
-            <label class="label">Email</label>
-            <div class="input-text-wrapper">
+            <label className="label">Email</label>
+            <div className="input-text-wrapper">
               <input
-                class="input-text"
+                className="input-text"
                 placeholder="Email"
                 id="email"
                 type="email"
@@ -52,10 +52,10 @@ const Login = (props) => {
             </div>
           </div>
           <div>
-            <label class="label">Password</label>
-            <div class="input-text-wrapper">
+            <label className="label">Password</label>
+            <div className="input-text-wrapper">
               <input
-                class="input-text"
+                className="input-text"
                 placeholder="Password"
                 id="password"
                 type="password"

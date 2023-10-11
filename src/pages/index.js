@@ -13,7 +13,7 @@ const Home = (props) => {
   const [popup, setPopup] = useState(null);
   const [start, setStart] = useState(0);
   const [total, setTotal] = useState(0);
-  const limit = 4;
+  const limit = 5;
   const cookie = useCookie(props.cookie);
   const router = useRouter();
   const jwt = cookie.get("jwt");
@@ -136,14 +136,14 @@ const Home = (props) => {
           deleteExpense={deleteExpense}
         />
       )}
-      <div className="container u-flex-vertical	u-gap-12 u-cross-center">
+      <div className="container u-flex-vertical	u-gap-12 u-cross-center u-main-center">
         <h1 className="heading-level-1 font-bold">Your expenses</h1>
         <button
           className="button"
           onClick={() => setPopup({ type: "new", data: null })}
         >
-          <span class="icon-plus" aria-hidden="true"></span>
-          <span class="text"> New Expense</span>
+          <span className="icon-plus" aria-hidden="true"></span>
+          <span className="text"> New Expense</span>
         </button>
         <ExpenseList setPopup={setPopup} expenses={expenses} />
         <div className="u-flex u-main-center u-gap-12">
