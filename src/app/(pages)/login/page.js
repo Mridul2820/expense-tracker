@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useCookie } from "next-cookie";
@@ -9,13 +8,19 @@ import { useCookie } from "next-cookie";
 import { account } from "@/config/appwrite";
 
 const Login = (props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const router = useRouter();
   const cookie = useCookie(props.cookie);
 
   const loginUser = async (e) => {
     e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const email = formData.get("email");
+    const password = formData.get("password");
+    if (!email || !password) {
+      toast.error("Please fill in all the fields");
+      return;
+    }
     try {
       await account.createEmailSession(email, password);
       const jwt = await account.createJWT();
@@ -46,10 +51,9 @@ const Login = (props) => {
               <input
                 className="input-text"
                 placeholder="Email"
-                id="email"
+                name="email"
                 type="email"
-                required={true}
-                onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
           </div>
@@ -59,19 +63,14 @@ const Login = (props) => {
               <input
                 className="input-text"
                 placeholder="Password"
-                id="password"
+                name="password"
                 type="password"
-                required={true}
-                onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
           </div>
           <div className="u-padding-block-16">
-            <button
-              type="submit"
-              disabled={!email || !password}
-              className="button"
-            >
+            <button type="submit" className="button">
               Login
             </button>
           </div>

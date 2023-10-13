@@ -10,19 +10,21 @@ import {
 } from "@/config/appwrite";
 
 export async function POST(req) {
+  const body = await req.json();
+  const { userId, title, amount, type } = body;
+  if (!userId || !title || !amount || !type) {
+    return new NextResponse("Missing fields", { status: 401 });
+  }
+
   const headersList = headers();
   const jwt = headersList.get("jwt");
 
   if (!jwt) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
+
   account.client.setJWT(jwt);
 
-  const body = await req.json();
-  const { userId, title, amount, type } = body;
-  if (!userId || !title || !amount || !type) {
-    return new NextResponse("Missing fields", { status: 401 });
-  }
   try {
     await database.createDocument(
       EXPENSE_DATABASE_ID,
@@ -46,19 +48,21 @@ export async function POST(req) {
 }
 
 export async function PUT(req) {
+  const body = await req.json();
+  const { title, amount, type, docId } = body;
+  if (!title || !amount || !type || !docId) {
+    return new NextResponse("Missing fields", { status: 401 });
+  }
+
   const headersList = headers();
   const jwt = headersList.get("jwt");
 
   if (!jwt) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
+
   account.client.setJWT(jwt);
 
-  const body = await req.json();
-  const { title, amount, type, docId } = body;
-  if (!title || !amount || !type || !docId) {
-    return new NextResponse("Missing fields", { status: 401 });
-  }
   try {
     await database.updateDocument(
       EXPENSE_DATABASE_ID,
@@ -70,9 +74,9 @@ export async function PUT(req) {
         type: type,
       }
     );
+
     return new NextResponse("Updated successfully", { status: 200 });
   } catch (error) {
-    console.log(error);
     return new NextResponse("Internal server error", {
       status: 500,
       error: error.message,
@@ -81,19 +85,22 @@ export async function PUT(req) {
 }
 
 export async function DELETE(req) {
+  const body = await req.json();
+  const { docId } = body;
+
+  if (!docId) {
+    return new NextResponse("Missing fields", { status: 401 });
+  }
+
   const headersList = headers();
   const jwt = headersList.get("jwt");
 
   if (!jwt) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
+
   account.client.setJWT(jwt);
 
-  const body = await req.json();
-  const { docId } = body;
-  if (!docId) {
-    return new NextResponse("Missing fields", { status: 401 });
-  }
   try {
     await database.deleteDocument(
       EXPENSE_DATABASE_ID,
@@ -102,7 +109,6 @@ export async function DELETE(req) {
     );
     return new NextResponse("Deleted successfully", { status: 200 });
   } catch (error) {
-    console.log(error);
     return new NextResponse("Internal server error", {
       status: 500,
       error: error.message,

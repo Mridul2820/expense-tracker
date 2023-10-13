@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -10,14 +9,20 @@ import { useCookie } from "next-cookie";
 import { account } from "@/config/appwrite";
 
 const SignUp = (props) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const router = useRouter();
   const cookie = useCookie(props.cookie);
 
   const signup = async (e) => {
     e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const name = formData.get("name");
+    if (!email || !password || !name) {
+      toast.error("Please fill in all the fields");
+      return;
+    }
     try {
       await account.create(ID.unique(), email, password, name);
       await account.createEmailSession(email, password);
@@ -49,10 +54,9 @@ const SignUp = (props) => {
               <input
                 className="input-text"
                 placeholder="Name"
-                id="name"
+                name="name"
                 type="text"
-                required={true}
-                onChange={(e) => setName(e.target.value)}
+                required
               />
             </div>
           </div>
@@ -62,10 +66,9 @@ const SignUp = (props) => {
               <input
                 className="input-text"
                 placeholder="Email"
-                id="email"
+                name="email"
                 type="email"
-                required={true}
-                onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
           </div>
@@ -75,20 +78,14 @@ const SignUp = (props) => {
               <input
                 className="input-text"
                 placeholder="Password"
-                id="password"
+                name="password"
                 type="password"
-                required={true}
-                onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
           </div>
-
           <div className="u-padding-block-16">
-            <button
-              type="submit"
-              disabled={!email || !password}
-              className="button"
-            >
+            <button type="submit" className="button">
               Sign Up
             </button>
           </div>

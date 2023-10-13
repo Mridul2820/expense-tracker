@@ -29,9 +29,9 @@ const Home = (props) => {
         jwt,
       },
       body: JSON.stringify({
-        userId: userId,
-        start: start,
-        limit: limit,
+        userId,
+        start,
+        limit,
       }),
     });
     const data = await response.json();
@@ -51,7 +51,7 @@ const Home = (props) => {
     // eslint-disable-next-line
   }, [start]);
 
-  const createExpense = async (title, amount, type) => {
+  const createExpense = async (item) => {
     const response = await fetch("/api/expense", {
       method: "POST",
       headers: {
@@ -59,10 +59,10 @@ const Home = (props) => {
         jwt,
       },
       body: JSON.stringify({
-        userId: userId,
-        title: title,
-        amount: amount,
-        type: type,
+        userId,
+        title: item.title,
+        amount: item.amount,
+        type: item.type,
       }),
     });
 

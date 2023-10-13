@@ -12,8 +12,8 @@ client
   .setEndpoint(config.APPWRITE_ENDPOINT)
   .setProject(config.APPWRITE_PROJECT);
 
-export const EXPENSE_DATABASE_ID = config.EXPENSE_DATABASE_ID;
-export const EXPENSE_COLLECTION_ID = config.EXPENSE_COLLECTION_ID;
-
 export const account = new Account(client);
 export const database = new Databases(client);
+
+export const EXPENSE_DATABASE_ID = config.EXPENSE_DATABASE_ID;
+export const EXPENSE_COLLECTION_ID = config.EXPENSE_COLLECTION_ID;

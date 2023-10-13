@@ -54,7 +54,7 @@ const EditExpensePopup = ({
                 placeholder="Title"
                 id="title"
                 type="text"
-                required={true}
+                required
                 value={item.title}
                 onChange={(e) => setItem({ ...item, title: e.target.value })}
               />
@@ -68,7 +68,7 @@ const EditExpensePopup = ({
                 placeholder="Title"
                 id="amount"
                 type="number"
-                required={true}
+                required
                 min="0"
                 value={item.amount}
                 onChange={(e) => setItem({ ...item, amount: e.target.value })}
