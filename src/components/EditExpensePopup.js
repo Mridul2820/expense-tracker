@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -45,10 +47,10 @@ const EditExpensePopup = ({
         </p>
         <form className="u-margin-block-start-12" onSubmit={handleSubmit}>
           <div>
-            <label class="label">Title</label>
-            <div class="input-text-wrapper">
+            <label className="label">Title</label>
+            <div className="input-text-wrapper">
               <input
-                class="input-text"
+                className="input-text"
                 placeholder="Title"
                 id="title"
                 type="text"
@@ -59,10 +61,10 @@ const EditExpensePopup = ({
             </div>
           </div>
           <div className="u-margin-block-start-12">
-            <label class="label">Amount($)</label>
-            <div class="input-text-wrapper">
+            <label className="label">Amount($)</label>
+            <div className="input-text-wrapper">
               <input
-                class="input-text"
+                className="input-text"
                 placeholder="Title"
                 id="amount"
                 type="number"
@@ -74,8 +76,8 @@ const EditExpensePopup = ({
             </div>
           </div>
           <div className="u-margin-block-start-12">
-            <label class="label">Type</label>
-            <div class="input-text-wrapper">
+            <label className="label">Type</label>
+            <div className="input-text-wrapper">
               <select
                 id="type"
                 className="input-text"

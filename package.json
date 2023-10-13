@@ -12,14 +12,14 @@
     "@appwrite.io/pink": "^0.0.6-rc.15",
     "@appwrite.io/pink-icons": "^0.0.6-rc.15",
     "appwrite": "^13.0.0",
-    "next": "^13.5.4",
+    "next": "latest",
     "next-cookie": "^2.8.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "latest",
+    "react-dom": "latest",
     "react-hot-toast": "^2.4.1"
   },
   "devDependencies": {
-    "eslint": "^8.50.0",
-    "eslint-config-next": "^13.5.4"
+    "eslint": "latest",
+    "eslint-config-next": "latest"
   }
 }

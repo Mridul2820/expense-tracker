@@ -1,7 +1,9 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
-import { useCookie } from "next-cookie";
 import toast from "react-hot-toast";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+import { useCookie } from "next-cookie";
 
 import DeleteExpensePopup from "@/components/DeleteExpensePopup";
 import CreateExpensePopup from "@/components/CreateExpensePopup";
@@ -14,8 +16,8 @@ const Home = (props) => {
   const [start, setStart] = useState(0);
   const [total, setTotal] = useState(0);
   const limit = 4;
-  const cookie = useCookie(props.cookie);
   const router = useRouter();
+  const cookie = useCookie(props.cookie);
   const jwt = cookie.get("jwt");
   const userId = cookie.get("userid");
 
@@ -142,8 +144,8 @@ const Home = (props) => {
           className="button"
           onClick={() => setPopup({ type: "new", data: null })}
         >
-          <span class="icon-plus" aria-hidden="true"></span>
-          <span class="text"> New Expense</span>
+          <span className="icon-plus" aria-hidden="true"></span>
+          <span className="text"> New Expense</span>
         </button>
         <ExpenseList setPopup={setPopup} expenses={expenses} />
         <div className="u-flex u-main-center u-gap-12">
