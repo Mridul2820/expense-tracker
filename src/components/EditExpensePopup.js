@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import toast from "react-hot-toast";
 
 const EditExpensePopup = ({
@@ -11,14 +11,17 @@ const EditExpensePopup = ({
   setPopup,
   editExpense,
 }) => {
-  const [item, setItem] = useState({
-    title: title || "",
-    amount: amount || "",
-    type: type || "",
-  });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    const item = {
+      docId,
+      title: formData.get("title"),
+      amount: formData.get("amount"),
+      type: formData.get("type"),
+    };
 
     if (!item.title) {
       return toast.error("Title is required");
@@ -30,7 +33,11 @@ const EditExpensePopup = ({
       return toast.error("Type is required");
     }
 
-    await editExpense(docId, item.title, item.amount, item.type);
+    try {
+      await editExpense(item);
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -52,11 +59,10 @@ const EditExpensePopup = ({
               <input
                 className="input-text"
                 placeholder="Title"
-                id="title"
+                name="title"
                 type="text"
                 required
-                value={item.title}
-                onChange={(e) => setItem({ ...item, title: e.target.value })}
+                defaultValue={title}
               />
             </div>
           </div>
@@ -66,24 +72,18 @@ const EditExpensePopup = ({
               <input
                 className="input-text"
                 placeholder="Title"
-                id="amount"
+                name="amount"
                 type="number"
                 required
                 min="0"
-                value={item.amount}
-                onChange={(e) => setItem({ ...item, amount: e.target.value })}
+                defaultValue={amount}
               />
             </div>
           </div>
           <div className="u-margin-block-start-12">
             <label className="label">Type</label>
             <div className="input-text-wrapper">
-              <select
-                id="type"
-                className="input-text"
-                value={item.type}
-                onChange={(e) => setItem({ ...item, type: e.target.value })}
-              >
+              <select name="type" className="input-text" defaultValue={type}>
                 <option value="">Select</option>
                 <option value="Paid">Paid</option>
                 <option value="Received">Received</option>

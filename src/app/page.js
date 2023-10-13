@@ -73,19 +73,14 @@ const Home = (props) => {
     }
   };
 
-  const editExpense = async (docId, title, amount, type) => {
+  const editExpense = async (doc) => {
     const response = await fetch("/api/expense", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         jwt,
       },
-      body: JSON.stringify({
-        docId: docId,
-        title: title,
-        amount: amount,
-        type: type,
-      }),
+      body: JSON.stringify(doc),
     });
 
     if (response.status === 200) {
