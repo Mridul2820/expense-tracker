@@ -35,10 +35,8 @@ export async function POST(req) {
       JSON.stringify({ items: items.documents, total: items.total })
     );
   } catch (error) {
-    console.log(error);
-    return new NextResponse("Internal server error", {
-      status: 500,
-      error: error.message,
-    });
+    return new NextResponse(
+      JSON.stringify({ message: error.message, code: error.code })
+    );
   }
 }

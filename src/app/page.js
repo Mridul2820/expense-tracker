@@ -22,6 +22,10 @@ const Home = (props) => {
   const userId = cookie.get("userid");
 
   const getExpenses = async () => {
+    if (!jwt) {
+      router.push("/login");
+      return;
+    }
     const response = await fetch("/api/expense/list", {
       method: "POST",
       headers: {
@@ -35,7 +39,7 @@ const Home = (props) => {
       }),
     });
     const data = await response.json();
-    if (data.error === "Failed to verify JWT. Invalid token: Expired") {
+    if (data.message === "Failed to verify JWT. Invalid token: Expired") {
       cookie.remove("jwt");
       cookie.remove("userid");
       toast.error("Session expired, please login again");
@@ -48,7 +52,6 @@ const Home = (props) => {
 
   useEffect(() => {
     getExpenses();
-    // eslint-disable-next-line
   }, [start]);
 
   const createExpense = async (title, amount, type) => {

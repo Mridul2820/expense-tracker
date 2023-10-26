@@ -37,7 +37,6 @@ export async function POST(req) {
     );
     return new NextResponse("Saved successfully", { status: 200 });
   } catch (error) {
-    console.log(error);
     return new NextResponse("Internal server error", {
       status: 500,
       error: error.message,
