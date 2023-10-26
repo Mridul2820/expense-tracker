@@ -68,6 +68,7 @@ const EditExpensePopup = ({
                 placeholder="Title"
                 id="amount"
                 type="number"
+                step="0.01"
                 required={true}
                 min="0"
                 value={item.amount}
